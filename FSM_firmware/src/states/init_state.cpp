@@ -38,7 +38,7 @@ void init_state_handler()
     pinMode(BUZZER_PIN, INPUT); // Hi Z stops hissing */
 
     machine.set_state(main_state_handler);
-    machine.update_widget_map_size(1,3);
+    machine.update_widget_map_size(2,3);
 
     refreshFlag = true;
 }

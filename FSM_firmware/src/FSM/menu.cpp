@@ -37,12 +37,17 @@ void menu::update_widget_map_size(uint8_t x_dimension, uint8_t y_dimension)
     quit_edit_widget(); // leave editing mode, safeguard code
 }
 
-int *menu::pop_widget_val_map(int *map, unsigned int len, int target_widget_value, int inactive_widget_value)
+int *menu::pop_widget_val_map(int *map, unsigned int len, int inactive_widget_value, int target_widget_value, int edit_widget_value)
 {
     for (unsigned int i = 0; i < len; i++)
     {
         if (get_target_widget() == i)
-            map[i] = target_widget_value;
+        {
+            if (is_edit_widget())
+                map[i] = edit_widget_value;
+            else
+                map[i] = target_widget_value;
+        }
         else
             map[i] = inactive_widget_value;
     }

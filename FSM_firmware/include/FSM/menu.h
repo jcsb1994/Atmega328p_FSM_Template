@@ -74,7 +74,7 @@ public:
 
     void update_widget_map_size(uint8_t x_count, uint8_t y_count); // when changing state, resets active widget
 
-    int *pop_widget_val_map(int *map, unsigned int len, int target_widget_value, int inactive_widget_value);
+    int *pop_widget_val_map(int *map, unsigned int len, int inactive_widget_value, int target_widget_value, int edit_widget_value);
 
     // color display menues
     /*     unsigned int get_widget_color(int8_t widget_map_index)

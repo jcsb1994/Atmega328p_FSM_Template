@@ -32,9 +32,9 @@ public:
     void quit_edit_widget() { myUI.Menu.quit_edit_widget(); }
     bool is_edit_widget() { return myUI.Menu.is_edit_widget(); }
 
-    int *pop_widget_val_map(int *map, unsigned int len, int target_widget_value, int inactive_widget_value)
+    int *pop_widget_val_map(int *map, unsigned int len, int inactive_widget_value, int target_widget_value, int edit_widget_value)
     {
-        return myUI.Menu.pop_widget_val_map(map, len, target_widget_value, inactive_widget_value);
+        return myUI.Menu.pop_widget_val_map(map, len, inactive_widget_value, target_widget_value, edit_widget_value);
     }
 
     void move_cursor_x(int8_t amount)
