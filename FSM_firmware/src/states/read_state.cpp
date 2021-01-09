@@ -9,9 +9,9 @@ void read_state_handler()
     Read sensors, solve refresh flags, ...
     */
 
-    switch (machine.poll_ui())
+    switch (machine.poll())
     {
-    case events::nothing:
+    case event::nothing:
     default:
         break;
     }

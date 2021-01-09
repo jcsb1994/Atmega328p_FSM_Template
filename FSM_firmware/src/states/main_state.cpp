@@ -3,7 +3,7 @@
 #include "FSM/states.h"
 #include "FSM/events.h"
 
-void list_state_handler()
+void main_state_handler()
 {
     if (refreshFlag)
     {
@@ -22,13 +22,17 @@ void list_state_handler()
         valuesRefreshFlag = false;
     }
 
-    switch (machine.poll_ui())
+    switch (machine.poll())
     {
-    case events::increment:
+    case event::left:
         valuesRefreshFlag = true;
         break;
 
-    case events::nothing:
+    case event::right:
+        valuesRefreshFlag = true;
+        break;
+
+    case event::nothing:
     default:
         break;
     }

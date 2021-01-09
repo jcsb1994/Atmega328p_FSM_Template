@@ -13,29 +13,36 @@ FSM::~FSM()
 {
 }
 
-events FSM::poll_ui()
+event FSM::extract_incoming_event()
 {
-    // poll all UI user inputs (tacts, encoders, etc.)
+    event ev = incoming_event;
+    incoming_event = event::nothing;
+    return ev;
+}
+
+event FSM::poll()
+{
+    if (incoming_event != event::nothing)
+    {
+        return extract_incoming_event();
+    }
+
+    // poll desired UI user inputs (tacts, encoders, etc.)
     myUI.poll_tacts();
 
-    // get an event from any of the polled input widgets
-    incoming_UI_event = myUI.release_ui_event();
+    // get any event that occured in the polled input widgets
+    incoming_event = myUI.extract_event();
 
 
-    if (incoming_UI_event)
+/*     if (incoming_UI_event)
     {
         Serial.print("FSM event");
         Serial.println(incoming_UI_event);
-    }
+    } */
 
-    return incoming_UI_event;
+    return incoming_event;
 }
 
-/*
-Sensor_events FSM::poll_sensors()
-    whatever sensor->read();
-    incoming
- */
 
 void FSM::handle_state()
 {

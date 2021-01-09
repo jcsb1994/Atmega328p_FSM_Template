@@ -10,11 +10,12 @@
 
 Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
 
-struct tact_link tact_links[TACT_NB]{{2, nothing, increment, decrement},
-                                     {3, nothing, saveToEEPROM, switchMenuPage},
-                                     {4, nothing, tare, switchReadingMode}};
+struct tact_link tact_links[TACT_NB]{{0, nothing, up, nothing},
+                                     {1, nothing, left, nothing},
+                                     {2, nothing, enter, nothing},
+                                     {3, nothing, down, nothing},
+                                     {4, nothing, right, nothing}};
 
-memory_interface memif;
 
 bool refreshFlag = false;
 bool valuesRefreshFlag = false;

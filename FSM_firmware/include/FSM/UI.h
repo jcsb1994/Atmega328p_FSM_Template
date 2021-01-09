@@ -11,15 +11,16 @@ private:
 
     tact myTacts[TACT_NB];
     // int m_tacts_states[TACT_NB];
-    events m_incoming_event = nothing;
+    event m_incoming_event = nothing;
 
 public:
     UI(/* args */);
     ~UI();
 
+
     void poll_tacts();
 
-    events release_ui_event()
+    event extract_event()
     {
         if (m_incoming_event)
         {
@@ -27,7 +28,7 @@ public:
             Serial.println("FSM event");
             Serial.println(m_incoming_event);
 
-            events event = m_incoming_event;
+            event event = m_incoming_event;
             m_incoming_event = nothing;
             return event;
         }

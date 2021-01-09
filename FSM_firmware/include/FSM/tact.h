@@ -8,7 +8,7 @@
             MACROS
 ##################################################*/
 
-#define TACT_NB 3
+#define TACT_NB 5
 #define LONG_PRESS_DELAY (400)
 #define BUTTON_ACTIVE_STATE_CONFIG 0
 // Debounce macros
@@ -18,9 +18,10 @@
 #define SAMPLE_FREQUENCY 6
 #define MAXIMUM (SAMPLE_FREQUENCY*DEBOUNCE_TIME)
 // Polling macros
-#define SHORT_EFFECT_REQUIRED 1
-#define RELEASE_EFFECT_REQUIRED 2
-#define LONG_EFFECT_REQUIRED 3
+#define SHORT_EFFECT_REQUIRED (1)
+#define RELEASE_EFFECT_REQUIRED (2)
+#define LONG_EFFECT_REQUIRED (3)
+#define TACT_PIN_UNASSIGNED (-1)
 
 /*##################################################
             DECLARATION
@@ -44,13 +45,13 @@ struct tact_link
 {
     int pin;
 
-    events short_press;
-    events release_press;
-    events long_press;
+    event short_press;
+    event release_press;
+    event long_press;
     tact_link(int pin,
-        events short_press_event = nothing,
-        events release_press_event = nothing,
-        events long_press_event = nothing) : pin(pin),
+        event short_press_event = nothing,
+        event release_press_event = nothing,
+        event long_press_event = nothing) : pin(pin),
         short_press(short_press_event),
         release_press(release_press_event),
         long_press(long_press_event) {}
@@ -67,7 +68,7 @@ class tact
 {
 
 private:
-    int pin;
+    int pin = TACT_PIN_UNASSIGNED;
     static int mCount;  // counts how many tacts are created
     unsigned int mID;   // sets a specific ID for each tact in order of creation
 

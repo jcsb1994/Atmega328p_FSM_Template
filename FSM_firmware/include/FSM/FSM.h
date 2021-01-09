@@ -9,14 +9,15 @@ class FSM
 private:
     /* data */
     UI myUI;
-    events incoming_UI_event;
+    event incoming_event;
     void (*state_handler)();
+    event extract_incoming_event();
 
 public:
     FSM(void initial_state(void));
     ~FSM();
 
-    events poll_ui();
+    event poll();
 
     void handle_state();
     void set_state(void state(void)) {state_handler = state; }

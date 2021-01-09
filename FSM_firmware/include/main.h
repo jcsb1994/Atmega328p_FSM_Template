@@ -30,8 +30,6 @@
 extern FSM machine;
 extern Adafruit_ST7789 tft;
 
-extern memory_interface memif;
-
 extern bool refreshFlag;
 extern bool valuesRefreshFlag;
 

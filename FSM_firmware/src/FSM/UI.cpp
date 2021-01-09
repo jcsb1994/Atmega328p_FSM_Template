@@ -18,7 +18,7 @@ void UI::poll_tacts()
     for (int i = 0; i < TACT_NB; i++)
     {
         int currentState;
-        if (myTacts[i].getPin())
+        if (myTacts[i].getPin() != TACT_PIN_UNASSIGNED)
         {
             currentState = myTacts[i].poll();
         }

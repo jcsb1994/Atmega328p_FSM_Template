@@ -1,14 +1,14 @@
 #ifndef EVENTS_H
 #define EVENTS_H
 
-enum events
+enum event
 {
     nothing, // Value 0 when no events are incoming
-    increment,
-    decrement,
-    saveToEEPROM,
-    tare,
-    switchReadingMode,
+    left,
+    right,
+    up,
+    down,
+    enter,
     switchMenuPage
 };
 
