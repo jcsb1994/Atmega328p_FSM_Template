@@ -16,7 +16,6 @@ struct tact_link tact_links[TACT_NB]{{0, nothing, up, nothing},
                                      {3, nothing, down, nothing},
                                      {4, nothing, right, nothing}};
 
-
 bool refreshFlag = false;
 bool valuesRefreshFlag = false;
 

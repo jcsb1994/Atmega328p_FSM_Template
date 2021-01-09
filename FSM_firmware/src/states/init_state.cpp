@@ -26,7 +26,7 @@ void init_state_handler()
     tft.setTextColor(ST77XX_WHITE);
     tft.print("Hello");
 
-    for (int thisNote = 0; thisNote < 3; thisNote++)
+/*     for (int thisNote = 0; thisNote < 3; thisNote++)
     {
         int noteDuration = 1000 / noteDurations[thisNote];
         tone(BUZZER_PIN, melody[thisNote], noteDuration);
@@ -35,8 +35,10 @@ void init_state_handler()
         delay(pauseBetweenNotes);
         noTone(BUZZER_PIN);
     }
-    pinMode(BUZZER_PIN, INPUT); // Hi Z stops hissing
+    pinMode(BUZZER_PIN, INPUT); // Hi Z stops hissing */
 
     machine.set_state(main_state_handler);
+    machine.update_widget_map_size(1,3);
+
     refreshFlag = true;
 }

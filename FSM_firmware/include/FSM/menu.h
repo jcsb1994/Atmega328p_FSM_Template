@@ -13,7 +13,7 @@
 //***********************************************************************************
 //
 // Description:
-//    This file provides a menu interface for screens. 
+//    This file provides a menu interface for screens.
 //
 //***********************************************************************************
 //
@@ -38,7 +38,7 @@
 class menu
 {
 private:
-    uint8_t cursor_pos[2] = {0, 0}; 
+    uint8_t cursor_pos[2] = {0, 0};
 
     uint8_t widget_map_size[2] = {0, 0};
 
@@ -53,13 +53,21 @@ public:
     menu() {}
     ~menu() {}
 
-    uint8_t get_x_widget_count() { return widget_map_size[X_COORD_INDEX]; }
-    uint8_t get_y_widget_count() { return widget_map_size[Y_COORD_INDEX]; }
+    uint8_t get_widget_x_nb() { return widget_map_size[X_COORD_INDEX]; }
+    uint8_t get_widget_y_nb() { return widget_map_size[Y_COORD_INDEX]; }
+    uint8_t get_widget_nb() { return (widget_map_size[X_COORD_INDEX] * widget_map_size[Y_COORD_INDEX]); }
+
+    uint8_t *get_widget_map_dimensions() { return widget_map_size; }
     uint8_t *get_cursor_pos() { return cursor_pos; }
-    uint8_t get_active_widget() { return target_widget; }
+    uint8_t get_target_widget() { return target_widget; }
+/*     uint8_t *gen_widget_map_values(int target_widget_value, int inactive_widget_value)
+    {
+        static int map[get_widget_nb()];
+        return cursor_pos;
+    } */
 
     void enter_edit_widget() { edit_widget = true; }
-    void quit_edit_widget() { edit_widget = false; } 
+    void quit_edit_widget() { edit_widget = false; }
     bool is_edit_widget() { return edit_widget; }
 
     void move_cursor(bool dim, int8_t amount);

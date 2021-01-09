@@ -2,7 +2,7 @@
 #define UI_H
 
 #include "../FSM/tact.h"
-
+#include "../FSM/menu.h"
 
 
 class UI
@@ -10,13 +10,14 @@ class UI
 private:
 
     tact myTacts[TACT_NB];
-    // int m_tacts_states[TACT_NB];
+
     event m_incoming_event = nothing;
 
 public:
-    UI(/* args */);
+    UI();
     ~UI();
 
+    menu Menu;
 
     void poll_tacts();
 
