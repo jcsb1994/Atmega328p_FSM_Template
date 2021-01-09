@@ -5,6 +5,7 @@
 void menu::update_target_widget_from_cursor()
 {
     target_widget = ((widget_map_size[Y_COORD_INDEX]) * cursor_pos[X_COORD_INDEX]) + cursor_pos[Y_COORD_INDEX];
+    //target_widget ++;
 }
 
 void menu::enclose_cursor()
@@ -19,7 +20,7 @@ void menu::enclose_cursor()
     }
 }
 
-void menu::move_cursor(bool dim, int8_t amount)
+void menu::move_cursor(uint8_t dim, int amount)
 {
     cursor_pos[dim] += amount;
     enclose_cursor();
@@ -34,6 +35,18 @@ void menu::update_widget_map_size(uint8_t x_dimension, uint8_t y_dimension)
 
     target_widget = 0;
     quit_edit_widget(); // leave editing mode, safeguard code
+}
+
+int *menu::pop_widget_val_map(int *map, unsigned int len, int target_widget_value, int inactive_widget_value)
+{
+    for (unsigned int i = 0; i < len; i++)
+    {
+        if (get_target_widget() == i)
+            map[i] = target_widget_value;
+        else
+            map[i] = inactive_widget_value;
+    }
+    return map;
 }
 
 //---------------------------------------------

@@ -32,14 +32,20 @@ public:
     void quit_edit_widget() { myUI.Menu.quit_edit_widget(); }
     bool is_edit_widget() { return myUI.Menu.is_edit_widget(); }
 
+    int *pop_widget_val_map(int *map, unsigned int len, int target_widget_value, int inactive_widget_value)
+    {
+        return myUI.Menu.pop_widget_val_map(map, len, target_widget_value, inactive_widget_value);
+    }
+
     void move_cursor_x(int8_t amount)
     {
         myUI.Menu.move_cursor(X_COORD_INDEX, amount);
     }
 
-    void move_cursor_y(int8_t amount)
+    void move_cursor_y(int amount)
     {
         myUI.Menu.move_cursor(Y_COORD_INDEX, amount);
+        delay(5);   // wierd not working with neg vals if no delay
     }
 
     void update_widget_map_size(uint8_t x_count, uint8_t y_count)

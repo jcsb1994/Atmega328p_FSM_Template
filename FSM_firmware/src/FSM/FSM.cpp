@@ -40,7 +40,7 @@ event FSM::poll()
         Serial.println(incoming_UI_event);
     } */
 
-    return incoming_event;
+    return extract_incoming_event();
 }
 
 
