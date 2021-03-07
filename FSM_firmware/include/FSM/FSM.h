@@ -1,3 +1,28 @@
+//***********************************************************************************
+// Copyright 2021 jcsb1994
+// Written by jcsb1994
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+//***********************************************************************************
+//
+// Description:
+//    This file provides a finite state machine class for managing embedded device
+//    firmware.
+//
+//***********************************************************************************
+//
+// FSM:
+//    A state handler is called each time the FSM steps with handle_state().
+//
+//***********************************************************************************
+
 #ifndef FSM_H
 #define FSM_H
 
@@ -6,7 +31,6 @@
 class FSM
 {
 private:
-    /* data */
     UI myUI;
     event incoming_event;
     void (*state_handler)();
@@ -45,7 +69,7 @@ public:
     void move_cursor_y(int amount)
     {
         myUI.Menu.move_cursor(Y_COORD_INDEX, amount);
-        delay(5);   // wierd not working with neg vals if no delay
+        delay(5);   // weird not working with neg vals if no delay
     }
 
     void update_widget_map_size(uint8_t x_count, uint8_t y_count)
