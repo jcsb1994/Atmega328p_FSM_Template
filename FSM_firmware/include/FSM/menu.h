@@ -1,5 +1,6 @@
 //***********************************************************************************
-// Copyright 2021 JCSB1994
+// Copyright 2021 jcsb1994
+// Written by jcsb1994
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -38,12 +39,10 @@
 class menu
 {
 private:
-    uint8_t cursor_pos[2] = {0, 0};
-
-    uint8_t widget_map_size[2] = {0, 0};
-
-    uint8_t target_widget;
-    bool edit_widget;
+    uint8_t _cursor_pos[2] = {0, 0};
+    uint8_t _widget_map_size[2] = {0, 0};
+    uint8_t _target_widget;
+    bool _edit_widget;
 
     // called when cursor pos is changed or widget count is changed
     void enclose_cursor();
@@ -53,22 +52,22 @@ public:
     menu() {}
     ~menu() {}
 
-    uint8_t get_widget_x_nb() { return widget_map_size[X_COORD_INDEX]; }
-    uint8_t get_widget_y_nb() { return widget_map_size[Y_COORD_INDEX]; }
-    uint8_t get_widget_nb() { return (widget_map_size[X_COORD_INDEX] * widget_map_size[Y_COORD_INDEX]); }
+    uint8_t get_widget_x_nb() { return _widget_map_size[X_COORD_INDEX]; }
+    uint8_t get_widget_y_nb() { return _widget_map_size[Y_COORD_INDEX]; }
+    uint8_t get_widget_nb() { return (_widget_map_size[X_COORD_INDEX] * _widget_map_size[Y_COORD_INDEX]); }
 
-    uint8_t *get_widget_map_dimensions() { return widget_map_size; }
-    uint8_t *get_cursor_pos() { return cursor_pos; }
-    uint8_t get_target_widget() { return target_widget; }
+    uint8_t *get_widget_map_dimensions() { return _widget_map_size; }
+    uint8_t *get_cursor_pos() { return _cursor_pos; }
+    uint8_t get_target_widget() { return _target_widget; }
     /*     uint8_t *gen_widget_map_values(int target_widget_value, int inactive_widget_value)
     {
         static int map[get_widget_nb()];
         return cursor_pos;
     } */
 
-    void enter_edit_widget() { edit_widget = true; }
-    void quit_edit_widget() { edit_widget = false; }
-    bool is_edit_widget() { return edit_widget; }
+    void enter_edit_widget() { _edit_widget = true; }
+    void quit_edit_widget() { _edit_widget = false; }
+    bool is_edit_widget() { return _edit_widget; }
 
     void move_cursor(uint8_t dim, int amount);
 

@@ -29,9 +29,9 @@ class UI
 {
 private:
 
-    tact myTacts[TACT_NB];
+    tact _Tacts[TACT_NB];
 
-    event m_incoming_event = nothing;
+    event _incoming_event = nothing;
 
 public:
     UI();
@@ -41,21 +41,7 @@ public:
 
     void poll_tacts();
 
-    event extract_event()
-    {
-        if (m_incoming_event)
-        {
-
-            Serial.println("FSM event");
-            Serial.println(m_incoming_event);
-
-            event event = m_incoming_event;
-            m_incoming_event = nothing;
-            return event;
-        }
-        else
-            return nothing;
-    }
+    event extract_event();
 };
 
 

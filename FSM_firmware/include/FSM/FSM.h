@@ -31,9 +31,9 @@
 class FSM
 {
 private:
-    UI myUI;
-    event incoming_event;
-    void (*state_handler)();
+    UI _UI;
+    event _incoming_event;
+    void (*_state_handler)();
     event extract_incoming_event();
 
 public:
@@ -43,38 +43,38 @@ public:
     event poll();
 
     void handle_state();
-    void set_state(void state(void)) { state_handler = state; }
+    void set_state(void state(void)) { _state_handler = state; }
 
-    uint8_t get_widget_count() { return myUI.Menu.get_widget_nb(); }
-    uint8_t get_x_widget_count() { return myUI.Menu.get_widget_x_nb(); }
-    uint8_t get_y_widget_count() { return myUI.Menu.get_widget_y_nb(); }
-    uint8_t *get_cursor_pos() { return myUI.Menu.get_cursor_pos(); }
-    uint8_t *get_widget_map_dimensions() { return myUI.Menu.get_widget_map_dimensions(); }
-    uint8_t get_target_widget() { return myUI.Menu.get_target_widget(); }
+    uint8_t get_widget_count() { return _UI.Menu.get_widget_nb(); }
+    uint8_t get_x_widget_count() { return _UI.Menu.get_widget_x_nb(); }
+    uint8_t get_y_widget_count() { return _UI.Menu.get_widget_y_nb(); }
+    uint8_t *get_cursor_pos() { return _UI.Menu.get_cursor_pos(); }
+    uint8_t *get_widget_map_dimensions() { return _UI.Menu.get_widget_map_dimensions(); }
+    uint8_t get_target_widget() { return _UI.Menu.get_target_widget(); }
 
-    void enter_edit_widget() { myUI.Menu.enter_edit_widget(); }
-    void quit_edit_widget() { myUI.Menu.quit_edit_widget(); }
-    bool is_edit_widget() { return myUI.Menu.is_edit_widget(); }
+    void enter_edit_widget() { _UI.Menu.enter_edit_widget(); }
+    void quit_edit_widget() { _UI.Menu.quit_edit_widget(); }
+    bool is_edit_widget() { return _UI.Menu.is_edit_widget(); }
 
-    int *pop_widget_val_map(int *map, unsigned int len, int inactive_widget_value, int target_widget_value, int edit_widget_value)
+    int *populate_widget_val_map(int *map, unsigned int len, int inactive_widget_value, int target_widget_value, int edit_widget_value)
     {
-        return myUI.Menu.pop_widget_val_map(map, len, inactive_widget_value, target_widget_value, edit_widget_value);
+        return _UI.Menu.pop_widget_val_map(map, len, inactive_widget_value, target_widget_value, edit_widget_value);
     }
 
     void move_cursor_x(int8_t amount)
     {
-        myUI.Menu.move_cursor(X_COORD_INDEX, amount);
+        _UI.Menu.move_cursor(X_COORD_INDEX, amount);
     }
 
     void move_cursor_y(int amount)
     {
-        myUI.Menu.move_cursor(Y_COORD_INDEX, amount);
+        _UI.Menu.move_cursor(Y_COORD_INDEX, amount);
         delay(5);   // weird not working with neg vals if no delay
     }
 
     void update_widget_map_size(uint8_t x_count, uint8_t y_count)
     {
-        myUI.Menu.update_widget_map_size(x_count, y_count);
+        _UI.Menu.update_widget_map_size(x_count, y_count);
     }
 };
 

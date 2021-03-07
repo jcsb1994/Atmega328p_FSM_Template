@@ -88,9 +88,9 @@ class tact
 {
 
 private:
-    int pin = TACT_PIN_UNASSIGNED;
-    static int mCount;  // counts how many tacts are created
-    unsigned int mID;   // sets a specific ID for each tact in order of creation
+    int _pin = TACT_PIN_UNASSIGNED;
+    static int _Count;  // counts how many tacts are created
+    unsigned int _ID;   // sets a specific ID for each tact in order of creation
 
     short state = 0;    // carries the current state after polling
 
@@ -100,16 +100,12 @@ private:
     // Debounce variables
     volatile unsigned int input = 1; // Current state of the tact switch
     volatile unsigned int integrator;
-    volatile bool now_debounced_input = 1; // Output of the algorithm
-    volatile bool last_debounced_input = 1;
+    volatile bool _curr_debounced_input = 1; // Output of the algorithm
+    volatile bool _last_debounced_input = 1;
 
     unsigned long long_press_counter = 0;
     bool long_effect_done = 0;
     bool is_pressed = false;    // Keeps track of which button is pressed during poll (useful when simultaneousButtonPressesConfig)
-
-
-
-
 
 public:
     tact() {};
@@ -124,11 +120,11 @@ public:
 
     void setPin(int assigned_pin)
     {
-        tact::pin = assigned_pin;
+        tact::_pin = assigned_pin;
     }
 
     int getPin() {
-        return tact::pin;
+        return tact::_pin;
     }
 
 };
