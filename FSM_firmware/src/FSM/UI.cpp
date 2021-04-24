@@ -4,7 +4,7 @@ UI::UI()
 {
     for (int i = 0; i < TACT_NB; i++)
     {
-        myTacts[i] = tact(tact_links[i].pin);
+        _Tacts[i] = tact(tact_links[i].pin);
     }
 }
 
@@ -18,22 +18,22 @@ void UI::poll_tacts()
     for (int i = 0; i < TACT_NB; i++)
     {
         int currentState;
-        if (myTacts[i].getPin() != TACT_PIN_UNASSIGNED)
+        if (_Tacts[i].getPin() != TACT_PIN_UNASSIGNED)
         {
-            currentState = myTacts[i].poll();
+            currentState = _Tacts[i].poll();
         }
         switch (currentState)
         {
         case SHORT_EFFECT_REQUIRED:
-            m_incoming_event = tact_links[i].short_press;
+            _incoming_event = tact_links[i].short_press;
             break;
 
         case RELEASE_EFFECT_REQUIRED:
-            m_incoming_event = tact_links[i].release_press;
+            _incoming_event = tact_links[i].release_press;
             break;
 
         case LONG_EFFECT_REQUIRED:
-            m_incoming_event = tact_links[i].long_press;
+            _incoming_event = tact_links[i].long_press;
             break;
 
         default:
@@ -43,4 +43,14 @@ void UI::poll_tacts()
     }
 }
 
-
+event UI::extract_event()
+{
+    if (_incoming_event)
+    {
+        event event = _incoming_event;
+        _incoming_event = nothing;
+        return event;
+    }
+    else
+        return nothing;
+}

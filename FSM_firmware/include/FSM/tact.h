@@ -1,3 +1,23 @@
+//***********************************************************************************
+// Copyright 2021 jcsb1994
+// Written by jcsb1994
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+//***********************************************************************************
+//
+// Description:
+//    This file provides a low level interface for tact switch input management.
+//
+//***********************************************************************************
+
+
 #ifndef TACT_H
 #define TACT_H
 
@@ -68,9 +88,9 @@ class tact
 {
 
 private:
-    int pin = TACT_PIN_UNASSIGNED;
-    static int mCount;  // counts how many tacts are created
-    unsigned int mID;   // sets a specific ID for each tact in order of creation
+    int _pin = TACT_PIN_UNASSIGNED;
+    static int _Count;  // counts how many tacts are created
+    unsigned int _ID;   // sets a specific ID for each tact in order of creation
 
     short state = 0;    // carries the current state after polling
 
@@ -80,16 +100,12 @@ private:
     // Debounce variables
     volatile unsigned int input = 1; // Current state of the tact switch
     volatile unsigned int integrator;
-    volatile bool now_debounced_input = 1; // Output of the algorithm
-    volatile bool last_debounced_input = 1;
+    volatile bool _curr_debounced_input = 1; // Output of the algorithm
+    volatile bool _last_debounced_input = 1;
 
     unsigned long long_press_counter = 0;
     bool long_effect_done = 0;
     bool is_pressed = false;    // Keeps track of which button is pressed during poll (useful when simultaneousButtonPressesConfig)
-
-
-
-
 
 public:
     tact() {};
@@ -104,11 +120,11 @@ public:
 
     void setPin(int assigned_pin)
     {
-        tact::pin = assigned_pin;
+        tact::_pin = assigned_pin;
     }
 
     int getPin() {
-        return tact::pin;
+        return tact::_pin;
     }
 
 };

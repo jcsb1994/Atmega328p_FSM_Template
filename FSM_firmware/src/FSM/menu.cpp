@@ -4,25 +4,25 @@
 
 void menu::update_target_widget_from_cursor()
 {
-    target_widget = ((widget_map_size[Y_COORD_INDEX]) * cursor_pos[X_COORD_INDEX]) + cursor_pos[Y_COORD_INDEX];
+    _target_widget = ((_widget_map_size[Y_COORD_INDEX]) * _cursor_pos[X_COORD_INDEX]) + _cursor_pos[Y_COORD_INDEX];
     //target_widget ++;
 }
 
 void menu::enclose_cursor()
 {
-    if (cursor_pos[X_COORD_INDEX] > (widget_map_size[X_COORD_INDEX] - 1))
+    if (_cursor_pos[X_COORD_INDEX] > (_widget_map_size[X_COORD_INDEX] - 1))
     {
-        cursor_pos[X_COORD_INDEX] = 0;
+        _cursor_pos[X_COORD_INDEX] = 0;
     }
-    if (cursor_pos[Y_COORD_INDEX] > (widget_map_size[Y_COORD_INDEX] - 1))
+    if (_cursor_pos[Y_COORD_INDEX] > (_widget_map_size[Y_COORD_INDEX] - 1))
     {
-        cursor_pos[Y_COORD_INDEX] = 0;
+        _cursor_pos[Y_COORD_INDEX] = 0;
     }
 }
 
 void menu::move_cursor(uint8_t dim, int amount)
 {
-    cursor_pos[dim] += amount;
+    _cursor_pos[dim] += amount;
     enclose_cursor();
     update_target_widget_from_cursor();
 }
@@ -30,10 +30,10 @@ void menu::move_cursor(uint8_t dim, int amount)
 
 void menu::update_widget_map_size(uint8_t x_dimension, uint8_t y_dimension)
 {
-    widget_map_size[X_COORD_INDEX] = x_dimension;
-    widget_map_size[Y_COORD_INDEX] = y_dimension;
+    _widget_map_size[X_COORD_INDEX] = x_dimension;
+    _widget_map_size[Y_COORD_INDEX] = y_dimension;
 
-    target_widget = 0;
+    _target_widget = 0;
     quit_edit_widget(); // leave editing mode, safeguard code
 }
 
