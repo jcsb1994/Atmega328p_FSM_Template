@@ -1,6 +1,5 @@
 //***********************************************************************************
-// Copyright 2021 jcsb1994
-// Written by jcsb1994
+// Copyright 2021 JCSB1994
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -40,7 +39,9 @@ class menu
 {
 private:
     uint8_t _cursor_pos[2] = {0, 0};
+
     uint8_t _widget_map_size[2] = {0, 0};
+
     uint8_t _target_widget;
     bool _edit_widget;
 
@@ -67,7 +68,7 @@ public:
 
     void enter_edit_widget() { _edit_widget = true; }
     void quit_edit_widget() { _edit_widget = false; }
-    bool is_edit_widget() { return _edit_widget; }
+    bool is_editing_widget() { return _edit_widget; }
 
     void move_cursor(uint8_t dim, int amount);
 

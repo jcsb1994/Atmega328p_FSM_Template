@@ -13,6 +13,8 @@ enum class main_state_widgets
     edit6,
 };
 
+
+
 enum class main_state_editable_widgets
 {
     edit1,
@@ -22,7 +24,6 @@ enum class main_state_editable_widgets
     edit5,
     edit6,
 };
-
 
 int var_one = 1;
 int var_two = 2;
@@ -79,7 +80,7 @@ void main_state_handler()
     case event::up:
         valuesRefreshFlag = true;
 
-        if (machine.is_edit_widget())
+        if (machine.is_editing_widget())
             switch (machine.get_target_widget())
             {
             case (int)main_state_editable_widgets::edit1:
@@ -107,7 +108,7 @@ void main_state_handler()
     case event::down:
         valuesRefreshFlag = true;
         
-        if (machine.is_edit_widget())
+        if (machine.is_editing_widget())
         {
         }
 
@@ -127,7 +128,7 @@ void main_state_handler()
         case (int)main_state_widgets::edit5:
         case (int)main_state_widgets::edit6:
 
-            if (machine.is_edit_widget())
+            if (machine.is_editing_widget())
                 machine.quit_edit_widget();
             else
                 machine.enter_edit_widget();

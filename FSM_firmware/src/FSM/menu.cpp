@@ -43,7 +43,7 @@ int *menu::pop_widget_val_map(int *map, unsigned int len, int inactive_widget_va
     {
         if (get_target_widget() == i)
         {
-            if (is_edit_widget())
+            if (is_editing_widget())
                 map[i] = edit_widget_value;
             else
                 map[i] = target_widget_value;
