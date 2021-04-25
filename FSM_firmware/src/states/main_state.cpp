@@ -2,35 +2,46 @@
 #include "main.h"
 #include "FSM/states.h"
 #include "FSM/events.h"
+#include "FSM/widget.h"
 
-enum class main_state_widgets
+typedef enum
 {
     edit1,
     edit2,
     edit3,
     edit4,
-    edit5,
-    edit6,
-};
+    fireCannon,
+    loadCannon,
+    W_MAIN_NB
+} main_state_widgets;
 
-
-
-enum class main_state_editable_widgets
-{
-    edit1,
-    edit2,
-    edit3,
-    edit4,
-    edit5,
-    edit6,
-};
-
+// dummy vars
+// use global object variables instead *use pointer get fct
 int var_one = 1;
 int var_two = 2;
 int var_three = 3;
-int vartwo_one = 4;
-int vartwo_two = 5;
-int vartwo_three = 6;
+int var_four = 4;
+
+void wd_loadCannon()
+{
+    tft.setCursor(0, 200);
+    tft.print("click ");
+}
+
+void wd_fireCannon()
+{
+    tft.setCursor(100, 200);
+    tft.print("pow! ");
+}
+
+widget mainWidgets[W_MAIN_NB] = {
+    widget(&var_one, 1),
+    widget(&var_two, 2),
+    widget(&var_three, 5),
+    widget(&var_four, 10),
+    widget(wd_fireCannon),
+    widget(wd_loadCannon),
+};
 
 void main_state_handler()
 {
@@ -50,9 +61,9 @@ void main_state_handler()
     {
         int widget_value_map[machine.get_widget_count()];
         int *val_map = widget_value_map;
-        val_map = machine.pop_widget_val_map(val_map, machine.get_widget_count(),  ST77XX_WHITE, ST77XX_MAGENTA, ST77XX_GREEN);
+        val_map = machine.pop_widget_val_map(val_map, machine.get_widget_count(), ST77XX_WHITE, ST77XX_MAGENTA, ST77XX_GREEN);
 
-        tft.setCursor(0, 80);   
+        tft.setCursor(0, 80);
         tft.setTextColor(val_map[0], ST77XX_BLACK);
         tft.println(var_one);
         tft.setTextColor(val_map[1], ST77XX_BLACK);
@@ -62,34 +73,28 @@ void main_state_handler()
 
         tft.setCursor(60, 80);
         tft.setTextColor(val_map[3], ST77XX_BLACK);
-        tft.print(vartwo_one);
+        tft.print(var_four);
         tft.setCursor(60, 100);
         tft.setTextColor(val_map[4], ST77XX_BLACK);
-        tft.print(vartwo_two);
+        tft.print("Fire");
         tft.setCursor(60, 120);
         tft.setTextColor(val_map[5], ST77XX_BLACK);
-        tft.print(vartwo_three);
+        tft.print("Load");
+
+        tft.print(machine.get_target_widget());
+
 
         valuesRefreshFlag = false;
     }
 
     switch (machine.poll())
     {
-        /*     case event::left:
-        refreshFlag = true; */
+
     case event::up:
         valuesRefreshFlag = true;
-
-        if (machine.is_editing_widget())
-            switch (machine.get_target_widget())
-            {
-            case (int)main_state_editable_widgets::edit1:
-                var_one++;
-                break;
-
-            default:
-                break;
-            }
+        if (machine.is_editing_widget()) {
+            mainWidgets[machine.get_target_widget()].increment();
+        }
         else
             machine.move_cursor_y(-1);
         break;
@@ -103,15 +108,12 @@ void main_state_handler()
         valuesRefreshFlag = true;
         machine.move_cursor_x(-1);
         break;
-        /*     case event::right:
-        refreshFlag = true; */
+
     case event::down:
         valuesRefreshFlag = true;
-        
-        if (machine.is_editing_widget())
-        {
-        }
 
+        if (machine.is_editing_widget())
+            mainWidgets[machine.get_target_widget()].decrement();
         else
             machine.move_cursor_y(1);
         break;
@@ -119,23 +121,13 @@ void main_state_handler()
     case event::enter:
         valuesRefreshFlag = true;
 
-        switch (machine.get_target_widget())
+        if (!machine.is_editing_widget())
         {
-        case (int)main_state_widgets::edit1:
-        case (int)main_state_widgets::edit2:
-        case (int)main_state_widgets::edit3:
-        case (int)main_state_widgets::edit4:
-        case (int)main_state_widgets::edit5:
-        case (int)main_state_widgets::edit6:
-
-            if (machine.is_editing_widget())
-                machine.quit_edit_widget();
-            else
-                machine.enter_edit_widget();
-            break;
-
-        default:
-            break;
+            (mainWidgets[machine.get_target_widget()].is_editable() ? machine.enter_edit_widget() : mainWidgets[machine.get_target_widget()].activate());
+        }
+        else
+        {
+            machine.quit_edit_widget();
         }
 
         break;

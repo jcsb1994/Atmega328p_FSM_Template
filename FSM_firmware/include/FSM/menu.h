@@ -13,8 +13,19 @@
 //***********************************************************************************
 //
 // Description:
-//    This file provides a menu interface for screens.
-//
+//    This file provides a menu interface for screens. It manages widget selection,
+//    but not the widgets and their effects when pressed
+//    Widgets are managed as 2 dimension coordinates. any nb of row and col can be created
+//    Rows are counted first, 
+//    Widget order should be designed in a way that it makes sense for the user to move down
+//    and select the next widget, and move sideways and select widget[current+row_nb]
+//    widget[X,Y] 
+//        
+//      ______SCREEN_________
+//      | Widget1   Widget4  |
+//      | Widget2   Widget5  |
+//      | Widget3   Widget6  |
+//      ----------------------
 //***********************************************************************************
 //
 // Widget map   : This menu i.f. lays the screen as a map made out of widgets in x and y coord
