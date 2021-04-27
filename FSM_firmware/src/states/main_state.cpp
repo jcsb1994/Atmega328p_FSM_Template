@@ -83,7 +83,6 @@ void main_state_handler()
 
         tft.print(machine.get_target_widget());
 
-
         valuesRefreshFlag = false;
     }
 
