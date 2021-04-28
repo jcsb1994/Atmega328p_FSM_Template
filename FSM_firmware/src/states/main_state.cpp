@@ -22,13 +22,13 @@ int var_two = 2;
 int var_three = 3;
 int var_four = 4;
 
-void wd_loadCannon()
+void wg_loadCannon()
 {
     tft.setCursor(0, 200);
     tft.print("click ");
 }
 
-void wd_fireCannon()
+void wg_fireCannon()
 {
     tft.setCursor(100, 200);
     tft.print("pow! ");
@@ -39,8 +39,8 @@ widget mainWidgets[W_MAIN_NB] = {
     widget(&var_two, 2),
     widget(&var_three, 5),
     widget(&var_four, 10),
-    widget(wd_fireCannon),
-    widget(wd_loadCannon),
+    widget(wg_fireCannon),
+    widget(wg_loadCannon),
 };
 
 void main_state_handler()
@@ -59,8 +59,8 @@ void main_state_handler()
 
     if (valuesRefreshFlag)
     {
-        int widget_value_map[machine.get_widget_count()];
-        int *val_map = widget_value_map;
+        int widget_states_values_map[machine.get_widget_count()];
+        int *val_map = widget_states_values_map;
         val_map = machine.pop_widget_val_map(val_map, machine.get_widget_count(), ST77XX_WHITE, ST77XX_MAGENTA, ST77XX_GREEN);
 
         tft.setCursor(0, 80);
@@ -81,13 +81,11 @@ void main_state_handler()
         tft.setTextColor(val_map[5], ST77XX_BLACK);
         tft.print("Load");
 
-        tft.print(machine.get_target_widget());
-
         valuesRefreshFlag = false;
     }
 
-    switch (machine.poll())
-    {
+    switch (machine.poll())     // could use a mapping constructor to map events to cursor move values (event::left, X_COORD_INDEX, move value)
+    {                           // could use another constructor to set a widget activating event
 
     case event::up:
         valuesRefreshFlag = true;

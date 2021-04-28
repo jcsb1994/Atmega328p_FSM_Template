@@ -21,7 +21,7 @@
 
 // App Specific Files
 #include "dialBitmap.h"
-
+#include "device/buzzer/BuzzerInterface.h"
 // ----------------------------------------------------------------------
 //      GLOBAL
 // Global variables, declared extern here to be accessed by states source files
@@ -34,5 +34,7 @@ extern bool valuesRefreshFlag;
 extern volatile uint8_t timerOneFlagIterator;
 
 extern Adafruit_ST7789 tft;
+extern BuzzerInterface Buzzer;
+extern Melody_t initMelody;
 
 #endif // MAIN_H

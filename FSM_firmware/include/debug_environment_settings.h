@@ -2,7 +2,7 @@
 
 #define __USING_SERIAL_DEBUG_MODE__ 0
 
-#define __USING_DEBUG_MODE__ 1
+#define __USING_DEBUG_MODE__ 0
 
 #if __USING_DEBUG_MODE__
 #include "avr8-stub.h"
