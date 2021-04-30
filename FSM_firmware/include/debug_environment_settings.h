@@ -1,4 +1,5 @@
 #ifndef __DEBUG_ENV_SETTINGS_H__
+#define __DEBUG_ENV_SETTINGS_H__
 
 #define __USING_SERIAL_DEBUG_MODE__ 0
 
